@@ -4,9 +4,9 @@ import { random } from "../functions/lib.js";
 
 const Circle = ({layers}) => {
     const artworkLayers = [
-        [{fill: '#99F2EF', rotate:'rotate(20, 50, 50)'}],
-        [{fill: '#99F2EF', rotate:'rotate(20, 50, 50)'} , {fill: '#00FF00', rotate:'rotate(120, 50, 50)'}],
-        [{fill: '#99F2EF', rotate:'rotate(20, 50, 50)'}, {fill: '#00FF00', rotate:'rotate(120, 50, 50)'} , {fill: '#0000FF', rotate:'rotate(90, 50, 50)'}]
+        [{rotate:'rotate(20, 50, 50)'}],
+        [{rotate:'rotate(20, 50, 50)'} , {rotate:'rotate(120, 50, 50)'}],
+        [{rotate:'rotate(20, 50, 50)'}, {rotate:'rotate(120, 50, 50)'} , {rotate:'rotate(90, 50, 50)'}]
     ]
 
     const colors = ['#99F2EF','#00FF00','#0000FF', '#EBD600', '#4169E1', `#FFA200`, 
