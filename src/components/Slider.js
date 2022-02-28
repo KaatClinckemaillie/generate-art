@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useStore } from "../store";
 
 const Slider = ({ onValueChange, value, label, min, max }) => {
   return (
@@ -16,13 +17,13 @@ const Slider = ({ onValueChange, value, label, min, max }) => {
   );
 };
 
-Slider.defaultProps = {
+/* Slider.defaultProps = {
   min: 0
 }
 
 Slider.propTypes = {
   onValueChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
-};
+}; */
 
 export default Slider;
