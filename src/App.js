@@ -37,8 +37,9 @@ function App() {
 
   return (
     <div className='container'>
-    <h1 className="title">Generate your own Karel-Martens artwork</h1>
-    <form>
+    <h1 className="hidden">Generate Art</h1>
+    <form className="form">
+      <p className="title">Generate your own Karel-Martens artwork</p>
       <Slider label="Amount of cells" min={0} max={5} value={amountColumns} onValueChange={(value) => changeGrid(value)}/>
       <Slider label="Amount of layers" min={1} max={3} value={amountLayers} onValueChange={(value) => changeLayers(value)}/>
     </form>

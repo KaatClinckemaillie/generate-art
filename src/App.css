@@ -4,5 +4,17 @@ path {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+}
+
+.hidden {
+  display: none;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 25rem 35rem;
+}
+
+.circle {
+  margin: 1rem 2rem;
 }

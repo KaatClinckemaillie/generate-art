@@ -14,7 +14,7 @@ const Circle = ({layers}) => {
     `#50B7D9`, `#00C900`];
 
     return (
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+        <svg className="circle" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             {artworkLayers[layers-1].map((layer, index) => < CirclePath rotate={layer.rotate} fill={colors[random(0,colors.length)]} key={index}/>)}            
         </svg>
     )
