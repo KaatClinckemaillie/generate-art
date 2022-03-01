@@ -2,44 +2,92 @@ import './App.css';
 import Grid from "./components/Grid";
 import Circle from './components/Circle';
 import Slider from './components/Slider';
-import { useState } from 'react';
 import { useStore } from "./store";
+import { useState } from "react";
 
 function App() {
 
-/*   const [amountColumns, setAmountColumns] = useState(0);
-  const [amountLayers, setAmountLayers] = useState(1);
-  const [amountGridItems, setAmountGridItems] = useState(1); */
+
   const amountColumns = useStore(state => state.amountColumns)
   const amountLayers = useStore(state => state.amountLayers)
   const amountGridItems = useStore(state => state.amountGridItems)
-
-  const [gridItems, setGridItems] = useState(new Array(amountGridItems).fill(<Circle layers={amountLayers} />));
+  const [positions, setPositions] = useState([]);
+  const [positionsX, setPositionsX] = useState([]);
+  const [positionsY, setPositionsY] = useState([]);
+  //const [gridItems, setGridItems] = useState(new Array(amountGridItems).fill(<Circle layers={amountLayers} />));
   
   const setAmountColumns = useStore(state => state.setAmountColumns);
   const setAmountGridItems = useStore(state => state.setAmountGridItems);
   const setAmountLayers = useStore(state => state.setAmountLayers);
+  const setScale = useStore(state => state.setScale);
+  
+  const handleClearArray = (array) => {
+    setPositions(positions.length = 0);
+  }
 
-   const changeGrid = (value) => {
+  const handleCalculatePositions = (array, columns, rows) => {
+    const tmp = [...array];
+    
+  }
+
+  const handleCreatePositions = (columns , amountCells) => {
+    const rows = amountCells / columns;
+    handleClearArray(positions);
+    handleClearArray(positionsX);
+    handleClearArray(positionsY);
+    const tmpPositions = [...positions];
+
+
+    for(let i = 0; i< 2; i ++){
+      tmpPositions.push({position: 'hello'});
+    }
+
+    setPositions(tmpPositions);
+
+    // set positions
+    console.log(positions)
+  }
+  
+  const changeGrid = (value) => {
     setAmountColumns(value);
+    handleCreatePositions(amountColumns, amountGridItems)
     if(value === 0) {     
       setAmountGridItems(1);
-      setGridItems(new Array(1).fill(<Circle layers={amountLayers} />));
+      //setGridItems(new Array(1).fill(<Circle layers={amountLayers} />));
     }else if (value === 1) {
-      setAmountGridItems(1);
-      setGridItems(new Array(2).fill(<Circle layers={amountLayers} />));
+      setAmountGridItems(2);
+      setScale(0.8)
+      //setGridItems(new Array(2).fill(<Circle layers={amountLayers} />));
     }  else {
-      console.log(value)
       const calculatedValue = value * (2 * value - 2);
       setAmountGridItems(calculatedValue);
-      setGridItems(new Array(calculatedValue).fill(<Circle layers={amountLayers} />));
+      //setGridItems(new Array(calculatedValue).fill(<Circle layers={amountLayers} />));
+      scaleCircles(value);
+      
     }
-    
-  } 
 
-   const changeLayers = (value) => {
+  }  
+
+  const scaleCircles = (value) => {
+    if(value === 2) {
+      setScale(0.6)
+    }
+    if(value === 3) {
+      setScale(0.4)
+    }
+    if(value === 4) {
+      setScale(0.2)
+    }
+    if(value === 5) {
+      setScale(0.1)
+    }
+  
+  }
+
+
+  const changeLayers = (value) => {
     setAmountLayers(value);
-    setGridItems(new Array(amountGridItems).fill(<Circle layers={value} />));    
+    //setGridItems(new Array(amountGridItems).fill(<Circle layers={value} />));    
   } 
 
   return (
@@ -52,7 +100,7 @@ function App() {
     </form>
 
     <div className='poster'>
-      <Grid gridItems={gridItems} gridColumns={amountColumns}/>
+      <Grid gridItems={amountGridItems} gridColumns={amountColumns}/>
 
       <div className='poster__name'>
 
