@@ -11,61 +11,97 @@ function App() {
   const amountColumns = useStore(state => state.amountColumns)
   const amountLayers = useStore(state => state.amountLayers)
   const amountGridItems = useStore(state => state.amountGridItems)
-  const [positions, setPositions] = useState([]);
-  const [positionsX, setPositionsX] = useState([]);
-  const [positionsY, setPositionsY] = useState([]);
+
+
+  const [positions, setPositions] = useState([{x: 0, y: 25}]);
+  //const [positionsX, setPositionsX] = useState([]);
+  //const [positionsY, setPositionsY] = useState([]);
   //const [gridItems, setGridItems] = useState(new Array(amountGridItems).fill(<Circle layers={amountLayers} />));
   
   const setAmountColumns = useStore(state => state.setAmountColumns);
   const setAmountGridItems = useStore(state => state.setAmountGridItems);
   const setAmountLayers = useStore(state => state.setAmountLayers);
   const setScale = useStore(state => state.setScale);
-  
-  const handleClearArray = (array) => {
-    setPositions(positions.length = 0);
+
+
+  const clearArray = (array) => {
+    array.length = 0
   }
 
-  const handleCalculatePositions = (array, columns, rows) => {
-    const tmp = [...array];
+  const calculatePositions = (columns, amountItems) => {
+    const rows = amountItems / columns;
+    const tmpPositionsX = [];
+    const tmpPositionsY = [];
+    const tmpPositions = [...positions];
+
+    //clearArray(tmpPositionsX);
+    //clearArray(tmpPositionsY);
+    clearArray(tmpPositions);
+    console.log(`columns : ${columns}`)
+    console.log(`amount Items = ${amountItems}`)
+
+    if(columns === 0){
+      tmpPositions.push({x: 0, y: 25});
+      setPositions(tmpPositions);
+    }else if (columns === 1) {
+      tmpPositions.push({x: 0, y: 0}, {x: 0, y:50});
+      setPositions(tmpPositions);
+      
+    }else{
+      // calculate all x components
+      for(let i = 0; i< columns; i ++){
+        tmpPositionsX.push(i * 100 / columns)
+      }
+      //setPositionsX(tmpPositionsX);
+
+      // calculate all y components
+      for(let i = 0; i< rows; i ++){
+        tmpPositionsY.push(i * 100 / rows)
+      } 
+      //setPositionsY(tmpPositionsY);
+    
+      tmpPositionsY.forEach(y => {
+        for(let i= 0; i< tmpPositionsX.length; i++){
+          tmpPositions.push({x: tmpPositionsX[i], y: y})
+        }
+      });
+      
+      setPositions(tmpPositions);
+    }
+    
     
   }
 
-  const handleCreatePositions = (columns , amountCells) => {
-    const rows = amountCells / columns;
-    handleClearArray(positions);
-    handleClearArray(positionsX);
-    handleClearArray(positionsY);
-    const tmpPositions = [...positions];
 
 
-    for(let i = 0; i< 2; i ++){
-      tmpPositions.push({position: 'hello'});
-    }
-
-    setPositions(tmpPositions);
-
-    // set positions
-    console.log(positions)
-  }
-  
   const changeGrid = (value) => {
     setAmountColumns(value);
-    handleCreatePositions(amountColumns, amountGridItems)
+    //calculateXPositions()
+    
     if(value === 0) {     
       setAmountGridItems(1);
+      calculatePositions(value, 1)
       //setGridItems(new Array(1).fill(<Circle layers={amountLayers} />));
     }else if (value === 1) {
       setAmountGridItems(2);
+      calculatePositions(value, 2)
       setScale(0.8)
       //setGridItems(new Array(2).fill(<Circle layers={amountLayers} />));
-    }  else {
+    }else if (value === 2){
+      setAmountGridItems(6)
+      calculatePositions(value, 6)
+      setScale(0.6)
+    } else {
       const calculatedValue = value * (2 * value - 2);
       setAmountGridItems(calculatedValue);
-      //setGridItems(new Array(calculatedValue).fill(<Circle layers={amountLayers} />));
-      scaleCircles(value);
+      calculatePositions(value, calculatedValue)
       
+      //setGridItems(new Array(calculatedValue).fill(<Circle layers={amountLayers} />));
+      scaleCircles(value);   
     }
 
+    
+    
   }  
 
   const scaleCircles = (value) => {
@@ -100,7 +136,8 @@ function App() {
     </form>
 
     <div className='poster'>
-      <Grid gridItems={amountGridItems} gridColumns={amountColumns}/>
+          {/* neemt verkeerde position (altijd eentje ervoor?) */}
+      <Grid  gridColumns={amountColumns} positions={positions}/>
 
       <div className='poster__name'>
 

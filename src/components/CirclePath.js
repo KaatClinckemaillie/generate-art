@@ -2,14 +2,15 @@ import PropTypes from "prop-types";
 
 const CirclePath = ({fill, rotate, scale}) => {
     return (
-        <g transform={scale}>
+
          <path
             className="circlePath" 
             d="M87 15.59a50 50 0 1 0 0 68.82ZM60.62 58.67a13.71 13.71 0 1 1-1.95-19.29 13.71 13.71 0 0 1 1.95 19.29Z"
             fill={fill} 
             transform={rotate}
         />  
-        </g>
+
+        
 /*         <g className="circlePath" transform={rotate} width="100" height="100">
             <defs>
                 <clipPath id="L1">

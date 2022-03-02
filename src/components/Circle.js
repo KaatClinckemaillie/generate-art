@@ -15,13 +15,15 @@ const colors = ['#99F2EF','#00FF00','#0000FF', '#EBD600', '#4169E1', `#FFA200`,
     `#50B7D9`, `#00C900`];
 
 
-const Circle = ({layers}) => {
+const Circle = ({layers, positions}) => {
     const scale = useStore(state => state.scale);
+     const amountGridItems = useStore(state => state.amountGridItems);
+
 
     return (
-        <>
-            {artworkLayers[layers-1].map((layer, index) => <g key={index} transform="translate(0 0)"> < CirclePath scale={`scale(${scale})`} rotate={layer.rotate} fill={colors[random(0,colors.length)]} key={index}/></g>)}            
-        </>
+        <g  transform={`translate(${positions.x} ${positions.y}) scale(${scale} )`} >            
+            {artworkLayers[layers-1].map((layer, index) =>  < CirclePath scale={`scale(${scale})`}  rotate={layer.rotate} fill={colors[random(0,colors.length)]} key={index}/>)}                       
+        </g>
     )
 }
 
