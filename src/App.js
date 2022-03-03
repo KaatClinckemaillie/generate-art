@@ -12,8 +12,9 @@ function App() {
   const amountLayers = useStore(state => state.amountLayers)
   const amountGridItems = useStore(state => state.amountGridItems)
 
-
-  const [positions, setPositions] = useState([{x: 0, y: 25}]);
+  const width = useStore(state => state.width);
+  const height = useStore(state => state.height);
+  const [positions, setPositions] = useState([{x: 0, y: (height - width) / 2}]);
   //const [positionsX, setPositionsX] = useState([]);
   //const [positionsY, setPositionsY] = useState([]);
   //const [gridItems, setGridItems] = useState(new Array(amountGridItems).fill(<Circle layers={amountLayers} />));
@@ -41,22 +42,22 @@ function App() {
     console.log(`amount Items = ${amountItems}`)
 
     if(columns === 0){
-      tmpPositions.push({x: 0, y: 25});
+      tmpPositions.push({x: 0, y: (height - width)/2});
       setPositions(tmpPositions);
     }else if (columns === 1) {
-      tmpPositions.push({x: 0, y: 0}, {x: 0, y:50});
+      tmpPositions.push({x: 0, y: 0}, {x: 0, y: height/2});
       setPositions(tmpPositions);
       
     }else{
       // calculate all x components
       for(let i = 0; i< columns; i ++){
-        tmpPositionsX.push(i * 100 / columns)
+        tmpPositionsX.push(i * width / columns)
       }
       //setPositionsX(tmpPositionsX);
 
       // calculate all y components
       for(let i = 0; i< rows; i ++){
-        tmpPositionsY.push(i * 100 / rows)
+        tmpPositionsY.push(i * height / rows)
       } 
       //setPositionsY(tmpPositionsY);
     
@@ -85,39 +86,35 @@ function App() {
     }else if (value === 1) {
       setAmountGridItems(2);
       calculatePositions(value, 2)
-      setScale(0.8)
+      setScale(0.5)
       //setGridItems(new Array(2).fill(<Circle layers={amountLayers} />));
     }else if (value === 2){
       setAmountGridItems(6)
+      setScale(0.3)
       calculatePositions(value, 6)
-      setScale(0.6)
     } else {
       const calculatedValue = value * (2 * value - 2);
       setAmountGridItems(calculatedValue);
       calculatePositions(value, calculatedValue)
-      
+      scaleCircles(value);
       //setGridItems(new Array(calculatedValue).fill(<Circle layers={amountLayers} />));
-      scaleCircles(value);   
+        
     }
 
-    
+     
     
   }  
 
   const scaleCircles = (value) => {
-    if(value === 2) {
-      setScale(0.6)
-    }
     if(value === 3) {
-      setScale(0.4)
+      setScale(0.2)
     }
     if(value === 4) {
-      setScale(0.2)
+      setScale(0.15)
     }
     if(value === 5) {
       setScale(0.1)
-    }
-  
+    }  
   }
 
 

@@ -8,6 +8,8 @@ const Grid = ({gridItems, positions}) => {
   const amountColumns = useStore(state => state.amountColumns);
   const amountLayers = useStore(state => state.amountLayers);
   const amountGridItems = useStore(state => state.amountGridItems);
+  const width = useStore(state => state.width);
+  const height = useStore(state => state.height);
 
   let columns
   if (amountColumns === 0){
@@ -27,7 +29,7 @@ const Grid = ({gridItems, positions}) => {
   createArrayCircles(arrayCircles);
 
   return (
-        <svg /* className="grid" */ style={{gridTemplateColumns: `repeat(${columns}, 1fr)`}} data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 150" width="400" height="600">
+        <svg /* className="grid" */  data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${width} ${height}`} >
           {/* hier moet je de positie van de cirkel al doorgeven */}
           {arrayCircles.map((item, index)=> <Circle positions={positions[index]} key={item} layers={amountLayers} />)}
         </svg>

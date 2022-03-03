@@ -7,7 +7,7 @@ const useStore = create(set => ({
     amountColumns : 0,
     scale : 1,
     width : 100,
-    height : 150,
+    height : 120,
     positions : [],
     positionsX : [],
     positionsY : [],
