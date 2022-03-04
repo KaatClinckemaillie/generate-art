@@ -1,23 +1,25 @@
 import './App.css';
 import Grid from "./components/Grid";
-import Circle from './components/Circle';
 import Slider from './components/Slider';
+import Color from './components/Color';
+import Name from './components/Name';
 import { useStore } from "./store";
 import { useState } from "react";
 
+// todo
+// toggle rotate
+//input name
+//pick amount of colors OR pick which colors
+
 function App() {
 
-
-  const amountColumns = useStore(state => state.amountColumns)
-  const amountLayers = useStore(state => state.amountLayers)
-  const amountGridItems = useStore(state => state.amountGridItems)
-
+  const amountColumns = useStore(state => state.amountColumns);
+  const amountLayers = useStore(state => state.amountLayers);
+  const name = useStore(state => state.name);
+  const colors = useStore(state => state.colors);
   const width = useStore(state => state.width);
   const height = useStore(state => state.height);
   const [positions, setPositions] = useState([{x: 0, y: (height - width) / 2}]);
-  //const [positionsX, setPositionsX] = useState([]);
-  //const [positionsY, setPositionsY] = useState([]);
-  //const [gridItems, setGridItems] = useState(new Array(amountGridItems).fill(<Circle layers={amountLayers} />));
   
   const setAmountColumns = useStore(state => state.setAmountColumns);
   const setAmountGridItems = useStore(state => state.setAmountGridItems);
@@ -35,14 +37,12 @@ function App() {
     const tmpPositionsY = [];
     const tmpPositions = [...positions];
 
-    //clearArray(tmpPositionsX);
-    //clearArray(tmpPositionsY);
     clearArray(tmpPositions);
     console.log(`columns : ${columns}`)
     console.log(`amount Items = ${amountItems}`)
 
     if(columns === 0){
-      tmpPositions.push({x: 0, y: (height - width)/2});
+      tmpPositions.push({x: 0, y: (height - width)/2 });
       setPositions(tmpPositions);
     }else if (columns === 1) {
       tmpPositions.push({x: 0, y: 0}, {x: 0, y: height/2});
@@ -53,13 +53,13 @@ function App() {
       for(let i = 0; i< columns; i ++){
         tmpPositionsX.push(i * width / columns)
       }
-      //setPositionsX(tmpPositionsX);
+
 
       // calculate all y components
       for(let i = 0; i< rows; i ++){
         tmpPositionsY.push(i * height / rows)
       } 
-      //setPositionsY(tmpPositionsY);
+
     
       tmpPositionsY.forEach(y => {
         for(let i= 0; i< tmpPositionsX.length; i++){
@@ -77,35 +77,38 @@ function App() {
 
   const changeGrid = (value) => {
     setAmountColumns(value);
-    //calculateXPositions()
-    
+    scaleCircles(value);
+
     if(value === 0) {     
       setAmountGridItems(1);
-      calculatePositions(value, 1)
-      //setGridItems(new Array(1).fill(<Circle layers={amountLayers} />));
+      calculatePositions(value, 1);
+
     }else if (value === 1) {
       setAmountGridItems(2);
       calculatePositions(value, 2)
-      setScale(0.5)
-      //setGridItems(new Array(2).fill(<Circle layers={amountLayers} />));
+
     }else if (value === 2){
       setAmountGridItems(6)
-      setScale(0.3)
       calculatePositions(value, 6)
+
     } else {
       const calculatedValue = value * (2 * value - 2);
       setAmountGridItems(calculatedValue);
-      calculatePositions(value, calculatedValue)
-      scaleCircles(value);
-      //setGridItems(new Array(calculatedValue).fill(<Circle layers={amountLayers} />));
-        
+      calculatePositions(value, calculatedValue)      
     }
-
-     
     
   }  
 
   const scaleCircles = (value) => {
+    if(value === 0){
+      setScale(1)
+    }
+    if(value === 1) {
+      setScale(0.5)
+    }
+    if(value === 2) {
+      setScale(0.3)
+    }
     if(value === 3) {
       setScale(0.2)
     }
@@ -118,26 +121,23 @@ function App() {
   }
 
 
-  const changeLayers = (value) => {
-    setAmountLayers(value);
-    //setGridItems(new Array(amountGridItems).fill(<Circle layers={value} />));    
-  } 
-
   return (
     <div className='container'>
     <h1 className="hidden">Generate Art</h1>
-    <form className="form">
+    <div className="form">
       <p className="title">Generate your own Karel-Martens artwork</p>
-      <Slider label="Amount of cells" min={0} max={5} value={amountColumns}  onValueChange={(value) => changeGrid(value)} />
-      <Slider label="Amount of layers" min={1} max={3} value={amountLayers}  onValueChange={(value) => changeLayers(value)} />
-    </form>
+      <Slider label="Size of the grid" min={0} max={5} value={amountColumns}  onValueChange={(value) => changeGrid(value)} />
+      <Slider label="Amount of layers" min={1} max={3} value={amountLayers}  onValueChange={(value) => setAmountLayers(value)} />
+      <Name />
+      <p>Select your colors:</p>
+      {colors.map(color => <Color value={color} key={color} /> )}
+
+    </div>
 
     <div className='poster'>
-          {/* neemt verkeerde position (altijd eentje ervoor?) */}
       <Grid  gridColumns={amountColumns} positions={positions}/>
-
       <div className='poster__name'>
-
+        {name}
       </div>
     </div>
     

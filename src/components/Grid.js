@@ -1,9 +1,9 @@
 import { useStore } from "../store";
 import Circle from "./Circle";
-import { useState } from "react";
 
 
-const Grid = ({gridItems, positions}) => {
+
+const Grid = ({positions}) => {
 
   const amountColumns = useStore(state => state.amountColumns);
   const amountLayers = useStore(state => state.amountLayers);
@@ -11,12 +11,7 @@ const Grid = ({gridItems, positions}) => {
   const width = useStore(state => state.width);
   const height = useStore(state => state.height);
 
-  let columns
-  if (amountColumns === 0){
-    columns = 1
-  }else {
-    columns = amountColumns
-  }
+
   const arrayCircles = []
   
   
