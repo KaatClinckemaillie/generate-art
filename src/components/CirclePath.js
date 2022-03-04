@@ -10,20 +10,7 @@ const CirclePath = ({fill, rotate, scale}) => {
             transform={rotate}
         />  
 
-        
-/*         <g className="circlePath" transform={rotate} width="100" height="100">
-            <defs>
-                <clipPath id="L1">
-                    <rect data-name="Rectangle 1" fill="#fff" width="80%" height="100%" />
-                </clipPath>
-            </defs>
-            <g data-name="Mask Group 1" clipPath="url(#L1)">
-                <g data-name="Group 1">
-                    <circle data-name="Ellipse 1" cx="50" cy="50" r="50" fill={fill} />
-                    <circle data-name="Ellipse 2" cx="14" cy="14" r="14" transform="translate(36 36)" fill="#fff" />
-                </g>
-            </g>
-        </g> */
+
     )
 }
 

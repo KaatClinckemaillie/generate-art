@@ -3,13 +3,14 @@ import Circle from "./Circle";
 
 
 
-const Grid = ({positions}) => {
+const Grid = () => {
 
   const amountColumns = useStore(state => state.amountColumns);
   const amountLayers = useStore(state => state.amountLayers);
   const amountGridItems = useStore(state => state.amountGridItems);
   const width = useStore(state => state.width);
   const height = useStore(state => state.height);
+  const positions = useStore(state => state.positions);
 
 
   const arrayCircles = []
@@ -24,10 +25,9 @@ const Grid = ({positions}) => {
   createArrayCircles(arrayCircles);
 
   return (
-        <svg /* className="grid" */  data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${width} ${height}`} >
-          {/* hier moet je de positie van de cirkel al doorgeven */}
-          {arrayCircles.map((item, index)=> <Circle positions={positions[index]} key={item} layers={amountLayers} />)}
-        </svg>
+      <g className="grid">
+        {arrayCircles.map((item, index)=> <Circle  positions={positions[index]} key={item} layers={amountLayers} />)}
+      </g>
     );
 }
 

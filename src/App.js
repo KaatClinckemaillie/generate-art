@@ -1,37 +1,36 @@
 import './App.css';
 import Grid from "./components/Grid";
+
 import Slider from './components/Slider';
 import Color from './components/Color';
 import Name from './components/Name';
+import Poster from './components/Poster';
+import Form from './components/Form';
 import { useStore } from "./store";
 import { useState } from "react";
-
-// todo
-// toggle rotate
-//input name
-//pick amount of colors OR pick which colors
 
 function App() {
 
   const amountColumns = useStore(state => state.amountColumns);
   const amountLayers = useStore(state => state.amountLayers);
-  const name = useStore(state => state.name);
   const colors = useStore(state => state.colors);
   const width = useStore(state => state.width);
   const height = useStore(state => state.height);
-  const [positions, setPositions] = useState([{x: 0, y: (height - width) / 2}]);
-  
+  const name = useStore(state => state.name);
+  //const [positions, setPositions] = useState([{x: 2, y: 5}]);
+  const positions = useStore(state => state.positions);
   const setAmountColumns = useStore(state => state.setAmountColumns);
   const setAmountGridItems = useStore(state => state.setAmountGridItems);
   const setAmountLayers = useStore(state => state.setAmountLayers);
   const setScale = useStore(state => state.setScale);
+  const setPositions = useStore(state => state.setPositions);
+  
 
-
-  const clearArray = (array) => {
+/*   const clearArray = (array) => {
     array.length = 0
-  }
+  } */
 
-  const calculatePositions = (columns, amountItems) => {
+/*   const calculatePositions = (columns, amountItems) => {
     const rows = amountItems / columns;
     const tmpPositionsX = [];
     const tmpPositionsY = [];
@@ -42,16 +41,16 @@ function App() {
     console.log(`amount Items = ${amountItems}`)
 
     if(columns === 0){
-      tmpPositions.push({x: 0, y: (height - width)/2 });
+      tmpPositions.push({x: 2, y: 5 });
       setPositions(tmpPositions);
     }else if (columns === 1) {
-      tmpPositions.push({x: 0, y: 0}, {x: 0, y: height/2});
+      tmpPositions.push({x: 25, y: 0}, {x: 25, y: height/2});
       setPositions(tmpPositions);
       
     }else{
       // calculate all x components
       for(let i = 0; i< columns; i ++){
-        tmpPositionsX.push(i * width / columns)
+        tmpPositionsX.push(i * width / columns + 6)
       }
 
 
@@ -71,11 +70,11 @@ function App() {
     }
     
     
-  }
+  } */
 
 
 
-  const changeGrid = (value) => {
+/*   const changeGrid = (value) => {
     setAmountColumns(value);
     scaleCircles(value);
 
@@ -118,29 +117,22 @@ function App() {
     if(value === 5) {
       setScale(0.1)
     }  
-  }
+  } */
 
 
   return (
     <div className='container'>
     <h1 className="hidden">Generate Art</h1>
-    <div className="form">
+{/*     <div className="form">
       <p className="title">Generate your own Karel-Martens artwork</p>
       <Slider label="Size of the grid" min={0} max={5} value={amountColumns}  onValueChange={(value) => changeGrid(value)} />
       <Slider label="Amount of layers" min={1} max={3} value={amountLayers}  onValueChange={(value) => setAmountLayers(value)} />
       <Name />
       <p>Select your colors:</p>
       {colors.map(color => <Color value={color} key={color} /> )}
-
-    </div>
-
-    <div className='poster'>
-      <Grid  gridColumns={amountColumns} positions={positions}/>
-      <div className='poster__name'>
-        {name}
-      </div>
-    </div>
-    
+    </div> */}
+    < Form />
+     < Poster />     
     </div>
   );
 }

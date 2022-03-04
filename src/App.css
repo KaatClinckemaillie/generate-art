@@ -2,19 +2,38 @@
   mix-blend-mode: screen;
 }
 
-.grid {
-    display: grid;
-}
+
 
 .hidden {
   display: none;
 }
 
+
 .container {
-  display: grid;
-  grid-template-columns: 25rem 35rem;
+  width: 60rem;
+  margin: 0 auto;
+  grid-template-columns: 25rem 35rem;  
+  display: flex;
+  justify-content: space-between;
 }
 
-.circle {
-  margin: 1rem 2rem;
+.poster {  
+
+  display: grid;
+  place-content: center;
+  width: 20rem;
+
 }
+
+.grid {
+  isolation: isolate;
+  width: 25rem;
+  padding: 1rem;
+}
+
+.form {
+  background-color: white;
+  border: black solid 0.2rem;
+  width: 20rem;
+}
+

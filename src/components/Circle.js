@@ -21,7 +21,7 @@ const Circle = ({layers, positions}) => {
     const selectedColors = useStore(state => state.selectedColors);
     
     return (
-        <g  transform={`translate(${positions.x} ${positions.y}) scale(${scale} )`} >            
+        <g className="circle"  transform={`translate(${positions.x} ${positions.y}) scale(${scale} )`} >            
             {artworkLayers[layers-1].map((layer, index) =>  < CirclePath scale={`scale(${scale})`}  rotate={layer.rotate} fill={selectedColors[random(0,selectedColors.length)]} key={index}/>)}                       
         </g>
     )
