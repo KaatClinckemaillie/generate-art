@@ -1,3 +1,4 @@
+import './Grid.css';
 import { useStore } from "../store";
 import Circle from "./Circle";
 
@@ -5,9 +6,8 @@ import Circle from "./Circle";
 
 const Grid = () => {
 
-  const amountLayers = useStore(state => state.amountLayers);
   const amountGridItems = useStore(state => state.amountGridItems);
-  const positions = useStore(state => state.positions);
+  
   const widhtGrid = useStore(state=> state.widthGrid);
   const heightGrid = useStore(state => state.heightGrid);
 
@@ -24,7 +24,7 @@ const Grid = () => {
 
   return (
       <g className="grid" width={widhtGrid} height={heightGrid}>
-        {arrayCircles.map((item, index)=> <Circle index={index}  positions={positions[index]} key={item} layers={amountLayers} />)}
+        {arrayCircles.map((item, index)=> <Circle index={index} key={item}  />)}
       </g>
     );
 }

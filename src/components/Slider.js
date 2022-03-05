@@ -2,7 +2,7 @@ import './Slider.css';
 import PropTypes from "prop-types";
 import { useStore } from "../store";
 
-const Slider = ({ onValueChange, value, label, min, max }) => {
+const Slider = ({ onValueChange, label, min, max }) => {
   const setAmountLayers = useStore(state => state.setAmountLayers);
   const clearArray = useStore(state => state.clearArray);
   const setAmountColumns = useStore(state => state.setAmountColumns);
@@ -12,7 +12,9 @@ const Slider = ({ onValueChange, value, label, min, max }) => {
   const positions = useStore(state => state.positions);
   const heightGrid = useStore(state => state.heightGrid);
   const widthGrid = useStore(state => state.widthGrid);
-
+  const amountLayers = useStore(state => state.amountLayers);
+  const amountColumns = useStore(state => state.amountColumns);
+  let value;
   const calculatePositions = (columns, amountItems) => {
     const rows = amountItems / columns;
     const tmpPositionsX = [];
@@ -101,6 +103,12 @@ const Slider = ({ onValueChange, value, label, min, max }) => {
     }  
   }
 
+  if(onValueChange === 'changeGrid') {
+    value = amountColumns;
+  }else {
+    value = amountLayers;
+  }
+
   return (
     <label className='labelSlider'>
       <span>{label}</span>
@@ -116,13 +124,16 @@ const Slider = ({ onValueChange, value, label, min, max }) => {
   );
 };
 
-/* Slider.defaultProps = {
-  min: 0
+Slider.defaultProps = {
+  min: 1,
+  max: 3,
 }
 
 Slider.propTypes = {
-  onValueChange: PropTypes.func.isRequired,
+  onValueChange: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-}; */
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired
+};  
 
 export default Slider;

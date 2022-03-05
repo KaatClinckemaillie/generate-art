@@ -16,7 +16,7 @@ const CirclePath = ({fill, rotate}) => {
     )
 }
 
-CirclePath.defaultProps = {
+CirclePath.propTypes = {
     fill: PropTypes.string.isRequired,
     rotate: PropTypes.string.isRequired
 }

@@ -10,7 +10,7 @@ const Poster = () => {
 
     return(
 
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${widthPoster} ${heightPoster}`} className='poster'>
+        <svg id="poster" xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${widthPoster} ${heightPoster}`} className='poster'>
             <Rect />
             <Grid  />
             <Text />

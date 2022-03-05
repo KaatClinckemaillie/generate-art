@@ -1,5 +1,6 @@
 import './Color.css';
 import { useStore } from "../store";
+import PropTypes from "prop-types";
 
 const Color = ({value}) => {
     const selectedColors = useStore(state => state.selectedColors);
@@ -37,6 +38,10 @@ const Color = ({value}) => {
                 />
         </label>
     )
+}
+
+Color.propTypes = {
+    value: PropTypes.string.isRequired,
 }
 
 export default Color;

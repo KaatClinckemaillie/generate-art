@@ -1,0 +1,5 @@
+.grid {
+  isolation: isolate;
+  width: 25rem;
+  padding: 1rem;
+}
