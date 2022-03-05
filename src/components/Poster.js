@@ -1,17 +1,16 @@
+import './Poster.css'
 import { useStore } from "../store";
 import Grid from "./Grid";
 import Text from "./Text";
 import Rect from "./Rect";
 
 const Poster = () => {
-
-    const width = useStore(state => state.width);
-    const height = useStore(state => state.height);
-    const name = useStore(state => state.name);
+    const widthPoster = useStore(state => state.widthPoster);
+    const heightPoster = useStore(state => state.heightPoster);
 
     return(
 
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${width} ${height}`} className='poster'>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${widthPoster} ${heightPoster}`} className='poster'>
             <Rect />
             <Grid  />
             <Text />

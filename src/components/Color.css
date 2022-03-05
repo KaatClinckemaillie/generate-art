@@ -1,0 +1,9 @@
+.checkbox{
+    display: none;
+}
+
+.labelColor {
+    display: grid;
+    place-content: center;
+    margin-top: 1rem;
+}

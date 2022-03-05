@@ -5,13 +5,11 @@ import Circle from "./Circle";
 
 const Grid = () => {
 
-  const amountColumns = useStore(state => state.amountColumns);
   const amountLayers = useStore(state => state.amountLayers);
   const amountGridItems = useStore(state => state.amountGridItems);
-  const width = useStore(state => state.width);
-  const height = useStore(state => state.height);
   const positions = useStore(state => state.positions);
-
+  const widhtGrid = useStore(state=> state.widthGrid);
+  const heightGrid = useStore(state => state.heightGrid);
 
   const arrayCircles = []
   
@@ -25,8 +23,8 @@ const Grid = () => {
   createArrayCircles(arrayCircles);
 
   return (
-      <g className="grid">
-        {arrayCircles.map((item, index)=> <Circle  positions={positions[index]} key={item} layers={amountLayers} />)}
+      <g className="grid" width={widhtGrid} height={heightGrid}>
+        {arrayCircles.map((item, index)=> <Circle index={index}  positions={positions[index]} key={item} layers={amountLayers} />)}
       </g>
     );
 }

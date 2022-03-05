@@ -1,3 +1,4 @@
+import './Color.css';
 import { useStore } from "../store";
 
 const Color = ({value}) => {
@@ -22,11 +23,13 @@ const Color = ({value}) => {
     }
 
     return (
-        <label>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" width={35} height={35}>
-                <circle cx="6" cy="6" r="4" stroke= {colorIsSelected ? "#000" : "none"} fill={value} strokeWidth={0.5}/>
+        <label className='labelColor' > 
+                <svg className='svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" width={35} height={35}>
+                    <circle cx="5" cy="5" r="4" stroke= {colorIsSelected ? "#000" : "none"} fill={value} strokeWidth={0.5}/>
+                    <circle cx="5" cy="5" r="1" fill= {colorIsSelected ? "#fff" : "none"} />
                 </svg>
                 <input 
+                    className='checkbox'
                     type="checkbox" 
                     value={value}
                     checked={colorIsSelected}

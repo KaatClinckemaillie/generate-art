@@ -1,0 +1,6 @@
+.poster {  
+  display: grid;
+  place-content: center;
+  width: 25rem; 
+
+}

@@ -1,0 +1,11 @@
+.labelSlider {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 0.1rem solid black;
+    padding-bottom: 1rem;
+    margin-top: 1rem;    
+}
+
+.inputSlider {
+    margin-top: 1rem;
+}

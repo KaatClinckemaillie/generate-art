@@ -1,3 +1,4 @@
+import './Name.css'
 import { useStore } from "../store";
 
 const Name = () => {
@@ -5,8 +6,8 @@ const Name = () => {
   const setName = useStore(state => state.setName);
 
   return (
-  <label>
-    Name: <input type="text" value={name} onChange={(e) => setName(e.target.value, e)} />
+  <label className='label'>
+    Name of the artist: <input className='inputText' type="text" value={name} onChange={(e) => setName(e.target.value, e)} />
   </label>);
 }
 

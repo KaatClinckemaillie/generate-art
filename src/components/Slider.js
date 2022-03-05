@@ -1,3 +1,4 @@
+import './Slider.css';
 import PropTypes from "prop-types";
 import { useStore } from "../store";
 
@@ -9,8 +10,8 @@ const Slider = ({ onValueChange, value, label, min, max }) => {
   const setPositions = useStore(state => state.setPositions);
   const setScale = useStore(state => state.setScale);
   const positions = useStore(state => state.positions);
-  const height = useStore(state => state.height);
-  const width = useStore(state => state.width);
+  const heightGrid = useStore(state => state.heightGrid);
+  const widthGrid = useStore(state => state.widthGrid);
 
   const calculatePositions = (columns, amountItems) => {
     const rows = amountItems / columns;
@@ -23,22 +24,22 @@ const Slider = ({ onValueChange, value, label, min, max }) => {
     console.log(`amount Items = ${amountItems}`)
 
     if(columns === 0){
-      tmpPositions.push({x: 2, y: 5 });
+      tmpPositions.push({x: 8, y: (heightGrid - widthGrid) / 2 });
       setPositions(tmpPositions);
     }else if (columns === 1) {
-      tmpPositions.push({x: 25, y: 0}, {x: 25, y: height/2});
+      tmpPositions.push({x: widthGrid / 4, y: 0 + 12}, {x: widthGrid / 4, y: heightGrid/2 + 12});
       setPositions(tmpPositions);
       
     }else{
       // calculate all x components
       for(let i = 0; i< columns; i ++){
-        tmpPositionsX.push(i * width / columns + 6)
+        tmpPositionsX.push(i * widthGrid / columns + 24)
       }
 
 
       // calculate all y components
       for(let i = 0; i< rows; i ++){
-        tmpPositionsY.push(i * height / rows)
+        tmpPositionsY.push(i * heightGrid / rows + 12)
       } 
 
     
@@ -81,37 +82,36 @@ const Slider = ({ onValueChange, value, label, min, max }) => {
 
   const scaleCircles = (value) => {
     if(value === 0){
-      setScale(1)
+      setScale(3.98)
     }
     if(value === 1) {
-      setScale(0.5)
+      setScale(2)
     }
     if(value === 2) {
-      setScale(0.3)
+      setScale(1.6)
     }
     if(value === 3) {
-      setScale(0.2)
+      setScale(0.8)
     }
     if(value === 4) {
-      setScale(0.15)
+      setScale(0.6)
     }
     if(value === 5) {
-      setScale(0.1)
+      setScale(0.4)
     }  
   }
 
   return (
-    <label>
+    <label className='labelSlider'>
       <span>{label}</span>
       <input
+        className='inputSlider'
         type="range"
         min={min}
         max={max}
         value= {value}
-        /* onChange={(e) => onValueChange(parseInt(e.target.value, 10))} */
         onChange= {(e) => (onValueChange === 'changeGrid') ? changeGrid(parseInt(e.target.value, 10)) : setAmountLayers(parseInt(e.target.value, 10))}
       />
-      <span>{value}</span>
     </label>
   );
 };
